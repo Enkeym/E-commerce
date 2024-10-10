@@ -42,13 +42,13 @@ const ProductDetails = () => {
   return (
     <Container className='d-flex justify-content-center flex-column align-items-center gap-5 py-5'>
       <Card style={{ width: '25rem' }}>
-        <Card.Img variant='top' src={`${apiUrl}${image}`} />
+        <Card.Img variant='top' src={`${apiUrl}${image}`} alt={title} />
         <Card.Body>
           <Card.Title>{title}</Card.Title>
           <Card.Subtitle>{price}<span>&#36;</span></Card.Subtitle>
-          <Card.Text>{description}</Card.Text>
+          <Card.Text>{description || 'No description available'}</Card.Text>
           {userInfo && userInfo.id === userId ? (
-            <>
+            <div className='d-flex justify-content-between'>
               <Link to={`/products/edit/${id}`}>
                 <Button variant='secondary' className='me-2'>
                   Edit
@@ -57,12 +57,12 @@ const ProductDetails = () => {
               <Button onClick={handleDelete} variant='danger'>
                 Delete
               </Button>
-            </>
+            </div>
           ) : (
             cartItem ? (
               <div className='d-flex justify-content-between gap-3'>
                 <QuantitySelector productId={cartItem.productId} />
-                <Button variant='primary' onClick={() => navigate('/cart')}>Cart</Button>
+                <Link to="/cart" className="btn btn-primary">Go to Cart</Link>
               </div>
             ) : (
               <AddToCartButton product={data} />
