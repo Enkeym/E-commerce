@@ -13,7 +13,7 @@ router.use(protect)
 
 router.get('/', getCart)
 router.post('/add', addToCart)
-router.post('/remove/:productId', removeFromCart)
-router.post('/edit/:productId', editCartQuantity)
+router.delete('/remove/:productId', removeFromCart)
+router.put('/edit/:productId', editCartQuantity)
 
 export default router

@@ -1,5 +1,4 @@
-import { api } from './api'
-import { providesList } from './api'
+import { api, providesList } from './api'
 const ORDERS_URL = '/api/orders'
 
 export const ordersApi = api.injectEndpoints({
@@ -26,7 +25,7 @@ export const ordersApi = api.injectEndpoints({
     removeOrders: builder.mutation({
       query: (id) => ({
         url: `${ORDERS_URL}/${id}`,
-        method: 'POST'
+        method: 'DELETE'
       }),
       invalidatesTags: [{ type: 'Orders' }]
     })

@@ -1,37 +1,29 @@
-import {Form} from 'react-bootstrap';
-import {useGetCategoryQuery} from '../../app/services/categoryApi';
-import Loader from '../../components/loader/Loader';
-import {useCallback} from 'react';
+import { useCallback } from "react";
+import { Form } from "react-bootstrap";
+import Loader from "../../components/loader/Loader";
 
-const FormOption = ({value, onChange}) => {
-  const {data: categories = [], isLoading, isError} = useGetCategoryQuery();
+const FormOption = ({ value, onChange, options = [], loading, error, placeholder = 'Select an option' }) => {
 
   const handleChange = useCallback((e) => {
     onChange(e.target.value);
   }, [onChange]);
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  if (isError) {
-    return <p>Error loading categories.</p>;
-  }
-
-  if (categories.length === 0) {
-    return <p>No categories available.</p>;
-  }
-
-
   return (
     <Form.Group className="mb-3">
+      {loading && <Loader />}
+      {error && <p className="text-danger">Error loading options.</p>}
+
       <Form.Select value={value} onChange={handleChange} required>
-        <option value="">Select category</option>
-        {categories.map(({id, slug, name}) => (
-          <option key={id} value={slug}>
-            {name}
-          </option>
-        ))}
+        <option value="">{placeholder}</option>
+        {options.length === 0 ? (
+          <option disabled>No options available</option>
+        ) : (
+          options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))
+        )}
       </Form.Select>
     </Form.Group>
   );

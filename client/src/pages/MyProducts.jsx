@@ -1,16 +1,16 @@
-import {toast} from 'react-toastify'
+import { Container } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
+import { useMyProductsQuery } from '../app/services/productsApi'
+import AddCategory from '../components/category/AddCategory'
 import Loader from '../components/loader/Loader'
-import {useSelector} from 'react-redux'
-import AddProducts from '../components/products/product/AddProducts'
-import AddCategory from '../components/products/category/AddCategory'
-import MainProduct from '../components/products/product/MainProduct'
-import {Container} from 'react-bootstrap'
-import {useMyProductsQuery} from '../app/services/productsApi'
+import AddProducts from '../components/product/AddProducts'
+import MainProduct from '../components/product/MainProduct'
 
 
 const MyProducts = () => {
 
-  const {userInfo} = useSelector((state) => state.auth)
+  const { userInfo } = useSelector((state) => state.auth)
 
   const currentPage = useSelector((state) => state.products.currentPage)
   const currentPageSize = useSelector((state) => state.products.currentPageSize)

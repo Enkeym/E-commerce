@@ -1,5 +1,4 @@
-import { api } from './api'
-import { providesList } from './api'
+import { api, providesList } from './api'
 const PRODUCTS_URL = '/api/products'
 
 export const productsApi = api.injectEndpoints({
@@ -26,6 +25,14 @@ export const productsApi = api.injectEndpoints({
       }),
       providesTags: (result) => providesList(result, 'Goods')
     }),
+    addProduct: builder.mutation({
+      query: (formData) => ({
+        url: `${PRODUCTS_URL}/add`,
+        method: 'POST',
+        body: formData
+      }),
+      invalidatesTags: [{ type: 'Goods', id: 'LIST' }]
+    }),
     editProduct: builder.mutation({
       query: ({ id, formData }) => ({
         url: `${PRODUCTS_URL}/edit/${id}`,
@@ -37,18 +44,10 @@ export const productsApi = api.injectEndpoints({
     removeProduct: builder.mutation({
       query: (id) => ({
         url: `${PRODUCTS_URL}/remove/${id}`,
-        method: 'POST',
+        method: 'DELETE',
         body: { id }
       }),
       invalidatesTags: [{ type: 'Goods' }]
-    }),
-    addProduct: builder.mutation({
-      query: (formData) => ({
-        url: `${PRODUCTS_URL}/add`,
-        method: 'POST',
-        body: formData
-      }),
-      invalidatesTags: [{ type: 'Goods', id: 'LIST' }]
     })
   })
 })

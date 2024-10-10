@@ -1,14 +1,14 @@
-import {Navigate, useNavigate, useParams} from 'react-router-dom';
-import {useEditProductMutation, useProductByIdQuery} from '../../../app/services/productsApi';
-import Loader from '../../loader/Loader';
-import {Container} from 'react-bootstrap';
-import {toast} from 'react-toastify';
-import FormProduct from '../../../ui/forms/FormProduct';
+import { Container } from 'react-bootstrap';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useEditProductMutation, useProductByIdQuery } from '../../app/services/productsApi';
+import FormProduct from '../../ui/forms/FormProduct';
+import Loader from '../loader/Loader';
 
 const EditProducts = () => {
   const navigate = useNavigate();
   const params = useParams();
-  const {data, isLoading} = useProductByIdQuery(params.id || '');
+  const { data, isLoading } = useProductByIdQuery(params.id || '');
   const [editProduct] = useEditProductMutation();
 
   if (isLoading) {
@@ -21,7 +21,7 @@ const EditProducts = () => {
 
   const handleEditProduct = async (formData) => {
     try {
-      await editProduct({id: params.id, formData}).unwrap();
+      await editProduct({ id: params.id, formData }).unwrap();
       toast.success('Product successfully edited!');
       navigate('/products');
     } catch (err) {

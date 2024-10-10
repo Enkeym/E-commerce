@@ -12,6 +12,6 @@ const router = express.Router()
 router.get('/', protect, allOrders)
 router.get('/:id', protect, orderId)
 router.post('/', protect, addOrder)
-router.post('/:id', protect, removeOrder)
+router.delete('/:id', protect, removeOrder)
 
 export default router

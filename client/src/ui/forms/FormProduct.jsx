@@ -1,10 +1,10 @@
-import {useEffect, useState, useRef} from 'react';
-import {Button, Form} from 'react-bootstrap';
-import FormInput from './FormInput';
+import { useEffect, useRef, useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import CategoryOption from '../../components/category/CategoryOption';
 import FileInput from '../files/FileInput';
-import FormOption from '../options/FormOption';
+import FormInput from './FormInput';
 
-const FormProduct = ({onSubmit, initialData = {}, isLoading}) => {
+const FormProduct = ({ onSubmit, initialData = {}, isLoading }) => {
   const [formData, setFormData] = useState({
     title: initialData.title || '',
     price: initialData.price || '',
@@ -14,7 +14,7 @@ const FormProduct = ({onSubmit, initialData = {}, isLoading}) => {
   });
 
   const prevInitialDataRef = useRef(initialData);
-  const {title, price, description, categoryId, image} = formData;
+  const { title, price, description, categoryId, image } = formData;
 
   useEffect(() => {
     const prevInitialData = prevInitialDataRef.current;
@@ -38,7 +38,7 @@ const FormProduct = ({onSubmit, initialData = {}, isLoading}) => {
   }, [initialData]);
 
   const onChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
@@ -110,7 +110,7 @@ const FormProduct = ({onSubmit, initialData = {}, isLoading}) => {
         type="text"
         required
       />
-      <FormOption
+      <CategoryOption
         value={categoryId}
         onChange={onCategoryChange}
         required

@@ -1,14 +1,14 @@
-import {useState} from 'react';
-import {Button, Modal} from 'react-bootstrap';
-import {useAddProductMutation} from '../../../app/services/productsApi';
-import {toast} from 'react-toastify';
-import {useNavigate} from 'react-router-dom';
-import FormProduct from '../../../ui/forms/FormProduct';
+import { useState } from 'react';
+import { Button, Modal } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useAddProductMutation } from '../../app/services/productsApi';
+import FormProduct from '../../ui/forms/FormProduct';
 
 
 const AddProducts = () => {
   const [show, setShow] = useState(false);
-  const [addProducts, {isLoading}] = useAddProductMutation();
+  const [addProducts, { isLoading }] = useAddProductMutation();
   const navigate = useNavigate();
 
   const handleShow = () => setShow(true);

@@ -27,7 +27,7 @@ export const cartApi = api.injectEndpoints({
     removeFromCart: builder.mutation({
       query: (productID) => ({
         url: `${CART_URL}/remove/${productID}`,
-        method: 'POST'
+        method: 'DELETE'
       }),
       invalidatesTags: [{ type: 'Cart', id: 'LIST' }]
     }),
@@ -35,7 +35,7 @@ export const cartApi = api.injectEndpoints({
     editCartQuantity: builder.mutation({
       query: ({ productId, quantity }) => ({
         url: `${CART_URL}/edit/${productId}`,
-        method: 'POST',
+        method: 'PUT',
         body: { quantity }
       }),
       invalidatesTags: [{ type: 'Cart', id: 'LIST' }]

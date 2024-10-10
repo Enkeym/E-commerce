@@ -1,9 +1,10 @@
-import {useEffect, useState} from 'react';
-import {Button, Form, Modal} from 'react-bootstrap';
-import {useAddCategoriesMutation} from '../../../app/services/categoryApi';
-import {useNavigate} from 'react-router-dom';
-import {toast} from 'react-toastify';
-import FormInput from '../../../ui/forms/FormInput';
+import { useEffect, useState } from 'react';
+import { Button, Form, Modal } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useAddCategoriesMutation } from '../../app/services/categoryApi';
+import FormInput from '../../ui/forms/FormInput';
+import CategoryOption from './CategoryOption';
 
 
 const AddCategory = () => {
@@ -26,7 +27,7 @@ const AddCategory = () => {
     e.preventDefault();
 
     try {
-      await addCategories({name, slug}).unwrap();
+      await addCategories({ name, slug }).unwrap();
       toast.success('Created successfully!');
       handleClose();
       setName('');
@@ -47,6 +48,11 @@ const AddCategory = () => {
         <Modal.Header closeButton>
           <Modal.Title>Category</Modal.Title>
         </Modal.Header>
+
+        <Modal.Body>
+          <CategoryOption />
+        </Modal.Body>
+
         <Modal.Body>
           <Form onSubmit={handleAddProducts}>
             <FormInput

@@ -1,19 +1,19 @@
-import {Card, Container} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
-import Paginator from '../../pagination/Paginator'
+import { Card, Container } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { apiUrl } from '../../app/services/api'
+import Paginator from '../pagination/Paginator'
 
 
 
-const MainProduct = ({data}) => {
-  const {currentPageProducts, totalPages} = data
-  const apiUrl = import.meta.env.VITE_API_URL
+const MainProduct = ({ data }) => {
+  const { currentPageProducts, totalPages } = data
 
 
   if (!currentPageProducts || currentPageProducts.length === 0) {
     return (
       <Container
         className='d-flex justify-content-center align-items-center mt-5'
-        style={{color: 'red'}}
+        style={{ color: 'red' }}
       >
         <h2>Product not found or add your first product!</h2>
       </Container>
@@ -26,19 +26,19 @@ const MainProduct = ({data}) => {
       <Container className='d-flex justify-content-center flex-column align-items-center gap-5 py-5'>
 
         {currentPageProducts?.map((items) => {
-          const {id, title, image, description, price} = items
+          const { id, title, image, description, price } = items
           return (
             <Link
               to={`/products/${id}`}
               key={id}
-              style={{textDecoration: 'none'}}
+              style={{ textDecoration: 'none' }}
             >
 
-              <Card style={{width: '25rem'}}>
+              <Card style={{ width: '25rem' }}>
                 <Card.Img
                   variant='top'
                   src={`${apiUrl}${image}`}
-                  style={{height: '300px'}}
+                  style={{ height: '300px' }}
                 />
                 <Card.Body>
                   <Card.Title>{title}</Card.Title>
