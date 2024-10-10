@@ -1,26 +1,26 @@
-import {Link, Navigate, useNavigate, useParams} from 'react-router-dom';
-import Loader from '../components/loader/Loader';
-import {Button, Card, Container} from 'react-bootstrap';
-import {useProductByIdQuery, useRemoveProductMutation} from '../app/services/productsApi';
-import {useDispatch, useSelector} from 'react-redux';
-import {toast} from 'react-toastify';
+import { Button, Card, Container } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useProductByIdQuery, useRemoveProductMutation } from '../app/services/productsApi';
 import AddToCartButton from '../components/cart/AddToCart';
 import QuantitySelector from '../components/cart/QuantitySelector';
-import {setPage} from '../features/productsSlice';
+import Loader from '../components/loader/Loader';
+import { setPage } from '../features/productsSlice';
 
 const ProductDetails = () => {
   const navigate = useNavigate();
-  const {id} = useParams();
-  const {data, isLoading, isError} = useProductByIdQuery(id);
+  const { id } = useParams();
+  const { data, isLoading, isError } = useProductByIdQuery(id);
   const [remove] = useRemoveProductMutation();
   const dispatch = useDispatch();
-  const {userInfo} = useSelector((state) => state.auth);
-  const {items: cartItems = []} = useSelector((state) => state.cart);
+  const { userInfo } = useSelector((state) => state.auth);
+  const { items: cartItems = [] } = useSelector((state) => state.cart);
 
   if (isLoading) return <Loader />;
   if (isError || !data) return <Navigate to='/' />;
 
-  const {image, title, price, description, userId} = data;
+  const { image, title, price, description, userId } = data;
   const apiUrl = import.meta.env.VITE_API_URL;
 
   // Поиск товара в корзине по его productId
@@ -41,7 +41,7 @@ const ProductDetails = () => {
 
   return (
     <Container className='d-flex justify-content-center flex-column align-items-center gap-5 py-5'>
-      <Card style={{width: '25rem'}}>
+      <Card style={{ width: '25rem' }}>
         <Card.Img variant='top' src={`${apiUrl}${image}`} />
         <Card.Body>
           <Card.Title>{title}</Card.Title>
@@ -60,7 +60,10 @@ const ProductDetails = () => {
             </>
           ) : (
             cartItem ? (
-              <QuantitySelector productId={cartItem.productId} />
+              <div className='d-flex justify-content-between gap-3'>
+                <QuantitySelector productId={cartItem.productId} />
+                <Button variant='primary' onClick={() => navigate('/cart')}>Cart</Button>
+              </div>
             ) : (
               <AddToCartButton product={data} />
             )

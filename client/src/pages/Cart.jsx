@@ -1,16 +1,16 @@
-import {useEffect} from "react";
-import {Col, ListGroup, Row, Button} from "react-bootstrap";
-import {useGetCartQuery} from "../app/services/cartApi";
+import { useEffect } from "react";
+import { Button, Card, Col, Container, ListGroup, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useGetCartQuery } from "../app/services/cartApi";
+import QuantitySelector from "../components/cart/QuantitySelector";
+import RemoveFromCart from "../components/cart/RemoveFromCart";
 import Layout from "../components/layout/Layout";
-import {toast} from "react-toastify";
 import Loader from "../components/loader/Loader";
 import AddOrder from "../components/order/AddOrder";
-import RemoveFromCart from "../components/cart/RemoveFromCart";
-import QuantitySelector from "../components/cart/QuantitySelector";
-import {useNavigate} from "react-router-dom";
 
 const Cart = () => {
-  const {data: cartItems, isLoading, isError} = useGetCartQuery();
+  const { data: cartItems, isLoading, isError } = useGetCartQuery();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,28 +23,35 @@ const Cart = () => {
     return <Loader />;
   }
 
+  if (!cartItems || cartItems.length === 0) {
+    return (
+      <Layout>
+        <h1 className="my-4">Shopping Cart</h1>
+        <p>Your cart is empty.</p>
+        <Button variant="primary" className="mt-3" onClick={() => navigate('/products')}>
+          Go to Products
+        </Button>
+      </Layout>
+    );
+  }
+
   return (
     <Layout>
-      <h1>Shopping Cart</h1>
-      {cartItems?.length === 0 ? (
-        <>
-          <p>Your cart is empty.</p>
-          <Button variant="primary" onClick={() => navigate('/products')}>
-            Go to Products
-          </Button>
-        </>
-      ) : (
-        <>
+      <Container className="py-4">
+        <h1 className="my-4 text-center">Shopping Cart</h1>
+        <Card className="p-4 shadow-sm" style={{ maxWidth: '600px', margin: '0 auto' }}>
           <ListGroup>
-            {cartItems?.map((item) => (
+            {cartItems.map((item) => (
               <ListGroup.Item
                 key={item.productId}
-                className="d-flex justify-content-between align-items-center"
+                className="d-flex justify-content-between align-items-center gap-3"
               >
-                <div>
-                  <h5>{item.product.name}</h5>
-                  <QuantitySelector productId={item.productId} />
-                  <p>Price: ${item.total.toFixed(2)}</p>
+                <div className="d-flex align-items-center">
+                  <div className="me-4">
+                    <h5>{item.product.name}</h5>
+                    <p className="fw-bold">Price: ${item.total.toFixed(2)}</p>
+                  </div>
+                  <QuantitySelector productId={item.productId} className="me-3" />
                 </div>
                 <RemoveFromCart productId={item.productId} />
               </ListGroup.Item>
@@ -52,12 +59,12 @@ const Cart = () => {
           </ListGroup>
 
           <Row className="py-3">
-            <Col>
+            <Col className="text-center">
               <AddOrder />
             </Col>
           </Row>
-        </>
-      )}
+        </Card>
+      </Container>
     </Layout>
   );
 };
