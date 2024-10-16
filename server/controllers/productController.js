@@ -1,9 +1,9 @@
-import path, { dirname } from 'path'
-import fs from 'fs'
 import asyncHandler from 'express-async-handler'
-import { prisma } from '../../prisma/prisma-client.js'
-import logger from '../utils/logger.js'
+import fs from 'fs'
+import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
+import { prisma } from '../prisma/prisma-client.js'
+import logger from '../utils/logger.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -251,10 +251,10 @@ const editProducts = asyncHandler(async (req, res) => {
 })
 
 export {
-  allProducts,
   addProducts,
-  removeProducts,
+  allProducts,
   editProducts,
+  myProducts,
   productId,
-  myProducts
+  removeProducts
 }

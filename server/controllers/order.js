@@ -1,5 +1,5 @@
 import asyncHandler from 'express-async-handler'
-import { prisma } from '../../prisma/prisma-client.js'
+import { prisma } from '../prisma/prisma-client.js'
 import logger from '../utils/logger.js'
 
 // GET /api/orders
@@ -90,4 +90,4 @@ const removeOrder = asyncHandler(async (req, res) => {
   }
 })
 
-export { allOrders, addOrder, orderId, removeOrder }
+export { addOrder, allOrders, orderId, removeOrder }

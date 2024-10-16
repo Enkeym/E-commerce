@@ -1,6 +1,6 @@
-import asyncHandler from 'express-async-handler'
-import { prisma } from '../../prisma/prisma-client.js'
 import bcrypt from 'bcryptjs'
+import asyncHandler from 'express-async-handler'
+import { prisma } from '../prisma/prisma-client.js'
 import generateToken from '../utils/generateToken.js'
 import logger from '../utils/logger.js'
 
@@ -158,4 +158,4 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 })
 
-export { authUser, registerUser, logoutUser, userProfile, updateUserProfile }
+export { authUser, logoutUser, registerUser, updateUserProfile, userProfile }

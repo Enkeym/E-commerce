@@ -1,13 +1,13 @@
-import {Navbar, Nav, Container, NavDropdown, Badge} from 'react-bootstrap'
-import {LinkContainer} from 'react-router-bootstrap'
-import {FaSignInAlt, FaSignOutAlt, FaHome, FaShoppingCart} from 'react-icons/fa'
-import {useDispatch, useSelector} from 'react-redux'
-import {useLogoutMutation} from '../../app/services/usersApi'
-import {logout} from '../../features/authSlice'
+import { Badge, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { FaHome, FaShoppingCart, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa'
+import { useDispatch, useSelector } from 'react-redux'
+import { LinkContainer } from 'react-router-bootstrap'
+import { useLogoutMutation } from '../../app/services/usersApi'
+import { logout } from '../../features/authSlice'
 
 const Header = () => {
-  const {userInfo} = useSelector((state) => state.auth);
-  const {items: cartItems} = useSelector((state) => state.cart.items || [])
+  const { userInfo } = useSelector((state) => state.auth);
+  const { items: cartItems } = useSelector((state) => state.cart.items || [])
 
   const dispatch = useDispatch();
 
@@ -36,7 +36,7 @@ const Header = () => {
           </LinkContainer>
 
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
-          <Navbar.Collapse id='basic-navbar-nav'>
+          <Navbar.Collapse>
             <Nav className='ms-auto'>
               {userInfo && (
                 <LinkContainer to='/cart'>
@@ -84,7 +84,7 @@ const Header = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-    </header>
+    </header >
   )
 }
 export default Header

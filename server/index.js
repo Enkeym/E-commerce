@@ -1,15 +1,16 @@
-import path, { dirname } from 'path'
-import express from 'express'
+import cors from 'cors'
 import dotenv from 'dotenv'
-import user from './routes/user.js'
-import product from './routes/product.js'
+import express from 'express'
+import path, { dirname } from 'path'
+import cart from './routes/cart.js'
 import category from './routes/category.js'
 import order from './routes/order.js'
-import cart from './routes/cart.js'
+import product from './routes/product.js'
+import user from './routes/user.js'
 
-import { errorHandler, notFound } from './middleware/error.js'
 import cookieParser from 'cookie-parser'
 import { fileURLToPath } from 'url'
+import { errorHandler, notFound } from './middleware/error.js'
 
 dotenv.config()
 
@@ -19,6 +20,10 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const app = express()
+
+app.use(
+  cors({ origin: 'http://localhost:3000', 'http://77.222.53.239:3000': true })
+)
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

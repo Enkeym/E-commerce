@@ -1,5 +1,5 @@
 import asyncHandler from 'express-async-handler'
-import { prisma } from '../../prisma/prisma-client.js'
+import { prisma } from '../prisma/prisma-client.js'
 import logger from '../utils/logger.js'
 
 // GET /api/cart
@@ -189,4 +189,4 @@ const editCartQuantity = asyncHandler(async (req, res) => {
   }
 })
 
-export { getCart, addToCart, removeFromCart, editCartQuantity }
+export { addToCart, editCartQuantity, getCart, removeFromCart }

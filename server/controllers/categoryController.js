@@ -1,5 +1,5 @@
 import asyncHandler from 'express-async-handler'
-import { prisma } from '../../prisma/prisma-client.js'
+import { prisma } from '../prisma/prisma-client.js'
 import logger from '../utils/logger.js'
 
 // GET /api/category
@@ -106,4 +106,4 @@ const removeCategory = asyncHandler(async (req, res) => {
   }
 })
 
-export { allCategory, addCategory, singleCategory, removeCategory }
+export { addCategory, allCategory, removeCategory, singleCategory }

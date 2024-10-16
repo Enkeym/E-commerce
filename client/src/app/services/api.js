@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
 
 export const apiUrl =
-  import.meta.env.VITE_API_URL || 'http://77.222.53.239:5000/'
+  import.meta.env.VITE_API_URL || 'http://77.222.53.239:5000'
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: ''
+  baseUrl: apiUrl
 })
 
 export function providesList(result, tagType) {

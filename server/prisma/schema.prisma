@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = "file:./dev.db"
 }
 
 model User {
@@ -82,6 +82,6 @@ model CartProduct {
   quantity  Int
   total     Float
 
-  cart    Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade) 
-  product Product @relation(fields: [productId], references: [id], onDelete: Cascade) 
+  cart    Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 }

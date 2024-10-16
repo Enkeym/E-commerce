@@ -1,0 +1,18 @@
+.welcome-page {
+  height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.welcome-jumbotron {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-jumbotron h1 {
+  color: #007bff;
+}
+
+.welcome-jumbotron p {
+  color: #6c757d;
+}

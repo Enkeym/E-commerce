@@ -1,11 +1,11 @@
-import {useEffect, useState} from 'react';
-import {Form, Button} from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { useUpdateMutation } from '../app/services/usersApi';
 import Layout from '../components/layout/Layout';
 import Loader from '../components/loader/Loader';
-import {useDispatch, useSelector} from 'react-redux';
-import {toast} from 'react-toastify';
-import {useUpdateMutation} from '../app/services/usersApi';
-import {setCredentials} from '../features/authSlice';
+import { setCredentials } from '../features/authSlice';
 import FormInput from '../ui/forms/FormInput';
 
 const passwordPattern = /^[a-z0-9]{6,16}$/;
@@ -21,13 +21,13 @@ const Profile = () => {
     confirmPassword: ''
   })
 
-  const {password, confirmPassword} = formData
+  const { password, confirmPassword } = formData
   const dispatch = useDispatch();
-  const {userInfo} = useSelector((state) => state.auth);
-  const [update, {isLoading}] = useUpdateMutation();
+  const { userInfo } = useSelector((state) => state.auth);
+  const [update, { isLoading }] = useUpdateMutation();
 
   useEffect(() => {
-    setFormData({password: '', confirmPassword: ''})
+    setFormData({ password: '', confirmPassword: '' })
   }, [userInfo]);
 
   const validateField = (name, value) => {
@@ -41,12 +41,12 @@ const Profile = () => {
       error = 'Passwords do not match.';
     }
 
-    setErrors((prev) => ({...prev, [name]: error}));
+    setErrors((prev) => ({ ...prev, [name]: error }));
   }
 
   const onChange = (e) => {
-    const {name, value} = e.target;
-    setFormData((prev) => ({...prev, [name]: value}));
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
     validateField(name, value);
   }
 
@@ -63,7 +63,7 @@ const Profile = () => {
     }
 
     try {
-      const res = await update({password}).unwrap()
+      const res = await update({ password }).unwrap()
       dispatch(setCredentials(res))
       toast.success('Password updated successfully')
     } catch (error) {

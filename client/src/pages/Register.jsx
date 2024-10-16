@@ -1,12 +1,12 @@
-import {useEffect, useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Button, Col, Form, Row } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useRegisterMutation } from '../app/services/usersApi';
 import Layout from '../components/layout/Layout';
-import {Button, Col, Form, Row} from 'react-bootstrap';
-import {useDispatch, useSelector} from 'react-redux';
-import {useRegisterMutation} from '../app/services/usersApi';
-import {setCredentials} from '../features/authSlice';
-import {toast} from 'react-toastify';
 import Loader from '../components/loader/Loader';
+import { setCredentials } from '../features/authSlice';
 import FormInput from '../ui/forms/FormInput';
 
 // Паттерны для валидации полей
@@ -29,14 +29,14 @@ const Register = () => {
     confirmPassword: ''
   });
 
-  const {name, email, password, confirmPassword} = formData;
+  const { name, email, password, confirmPassword } = formData;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [register, {isLoading}] = useRegisterMutation();
+  const [register, { isLoading }] = useRegisterMutation();
 
-  const {userInfo} = useSelector((state) => state.auth);
+  const { userInfo } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (userInfo) {
@@ -45,8 +45,8 @@ const Register = () => {
   }, [navigate, userInfo]);
 
   const onChange = (e) => {
-    const {name, value} = e.target;
-    setFormData({...formData, [name]: value});
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
 
     validateField(name, value);
   };
@@ -67,7 +67,7 @@ const Register = () => {
       error = 'Passwords do not match.';
     }
 
-    setErrors({...errors, [name]: error});
+    setErrors({ ...errors, [name]: error });
   };
 
   const isFormValid = () => {
@@ -84,7 +84,7 @@ const Register = () => {
     }
 
     try {
-      const res = await register({name, email: email.toLowerCase(), password}).unwrap();
+      const res = await register({ name, email: email.toLowerCase(), password }).unwrap();
       dispatch(setCredentials(res));
       navigate('/products/my');
     } catch (error) {
