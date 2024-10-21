@@ -22,7 +22,10 @@ const __dirname = dirname(__filename)
 const app = express()
 
 app.use(
-  cors({ origin: 'http://localhost:3000', 'http://77.222.53.239:3000': true })
+  cors({
+    origin: ['http://localhost:3000', 'http://77.222.53.239:3000'],
+    credentials: true
+  })
 )
 
 app.use(express.json())

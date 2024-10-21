@@ -1,0 +1,28 @@
+.registerContainer {
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.registerTitle {
+  text-align: center;
+  color: #28a745;
+}
+
+.registerButton {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.formControl {
+  margin-bottom: 15px;
+}

@@ -1,5 +1,7 @@
+import 'bootstrap/dist/css/bootstrap.min.css'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux'
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -8,13 +10,11 @@ import {
   RouterProvider
 } from 'react-router-dom'
 import App from './App.jsx'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import store from './app/store.js'
 import './index.css'
 import Home from './pages/Home.jsx'
-import {Provider} from 'react-redux'
-import store from './app/store.js'
 import PrivateRoute from './utils/route/PrivateRoute.jsx'
-import {privateRoutes, routes} from './utils/route/routes.jsx'
+import { privateRoutes, routes } from './utils/route/routes.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(

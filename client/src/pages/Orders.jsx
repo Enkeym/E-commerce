@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useGetOrdersQuery } from "../app/services/ordersApi";
 import Layout from "../components/layout/Layout";
 import Loader from "../components/loader/Loader";
-import OrdersList from "../components/order/OrdersList";
+import OrdersList from "../components/order/ordersList/OrdersList";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);

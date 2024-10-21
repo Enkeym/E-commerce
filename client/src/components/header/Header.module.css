@@ -1,0 +1,42 @@
+/* Header.module.css */
+
+.header {
+  background-color: var(--bs-dark);
+  color: white;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2rem;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 1rem;
+  color: white;
+}
+
+.nav-link:hover {
+  color: var(--bs-light);
+}
+
+.cart-badge {
+  background-color: var(--bs-light);
+  color: var(--bs-dark);
+}
+
+.dropdown-toggle {
+  color: white;
+}
+
+.dropdown-toggle:hover {
+  color: var(--bs-light);
+}
+
+.navbar-collapse {
+  justify-content: flex-end;
+}

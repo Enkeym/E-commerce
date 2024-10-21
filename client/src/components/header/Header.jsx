@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useLogoutMutation } from '../../app/services/usersApi'
 import { logout } from '../../features/authSlice'
+import styles from './Header.module.css'
 
 const Header = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -16,9 +17,7 @@ const Header = () => {
 
   const logoutHandler = async () => {
     try {
-
       await logoutApiCall().unwrap();
-
       dispatch(logout());
     } catch (err) {
       console.log(err);
@@ -26,24 +25,24 @@ const Header = () => {
   };
 
   return (
-    <header>
+    <header className={styles.header}>
       <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
-            <Navbar.Brand className='d-flex align-items-center gap-1'>
+            <Navbar.Brand className={styles.brand}>
               <FaHome size={25} /> Main
             </Navbar.Brand>
           </LinkContainer>
 
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
-          <Navbar.Collapse>
-            <Nav className='ms-auto'>
+          <Navbar.Collapse className={styles['navbar-collapse']}>
+            <Nav>
               {userInfo && (
                 <LinkContainer to='/cart'>
-                  <Nav.Link>
+                  <Nav.Link className={styles['nav-link']}>
                     <FaShoppingCart size={20} /> Cart
                     {cartItems?.length > 0 && (
-                      <Badge bg='light' text='dark' className='ms-1'>
+                      <Badge bg='light' text='dark' className={styles['cart-badge']}>
                         {cartItems.length}
                       </Badge>
                     )}
@@ -52,7 +51,7 @@ const Header = () => {
               )}
 
               {userInfo ? (
-                <NavDropdown title={userInfo.name} id='username'>
+                <NavDropdown title={userInfo.name} id='username' className={styles['dropdown-toggle']}>
                   <LinkContainer to='/products/my'>
                     <NavDropdown.Item>My Products</NavDropdown.Item>
                   </LinkContainer>
@@ -69,12 +68,12 @@ const Header = () => {
               ) : (
                 <>
                   <LinkContainer to='/login'>
-                    <Nav.Link>
+                    <Nav.Link className={styles['nav-link']}>
                       <FaSignInAlt /> Sign In
                     </Nav.Link>
                   </LinkContainer>
                   <LinkContainer to='/register'>
-                    <Nav.Link>
+                    <Nav.Link className={styles['nav-link']}>
                       <FaSignOutAlt /> Sign Up
                     </Nav.Link>
                   </LinkContainer>
@@ -87,4 +86,5 @@ const Header = () => {
     </header >
   )
 }
-export default Header
+
+export default Header;

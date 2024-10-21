@@ -26,6 +26,13 @@ export const usersApi = api.injectEndpoints({
       }),
       invalidatesTags: [{ type: 'User' }]
     }),
+    getProfile: builder.query({
+      query: () => ({
+        url: `${USERS_URL}/profile`,
+        method: 'GET'
+      }),
+      providesTags: [{ type: 'User' }]
+    }),
     update: builder.mutation({
       query: (data) => ({
         url: `${USERS_URL}/profile`,
@@ -41,5 +48,6 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useRegisterMutation,
+  useGetProfileQuery,
   useUpdateMutation
 } = usersApi

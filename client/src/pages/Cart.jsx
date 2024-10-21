@@ -49,7 +49,7 @@ const Cart = () => {
                 <div className="d-flex align-items-center">
                   <div className="me-4">
                     <h5>{item.product.name}</h5>
-                    <p className="fw-bold">Price: ${item.total.toFixed(2)}</p>
+                    <p className="fw-bold">Price: ${parseFloat(item.total).toFixed(2)}</p>
                   </div>
                   <QuantitySelector productId={item.productId} className="me-3" />
                 </div>

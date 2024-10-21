@@ -3,11 +3,9 @@ import { Link } from 'react-router-dom';
 import { apiUrl } from '../../app/services/api';
 import Paginator from '../pagination/Paginator';
 
-// Компонент для отображения списка продуктов
 const MainProduct = ({ data }) => {
-  const { currentPageProducts, totalPages } = data;
+  const { currentPageProducts, totalPages } = data || {};
 
-  // Если продуктов нет, отображаем сообщение
   if (!currentPageProducts || currentPageProducts.length === 0) {
     return (
       <Container className='d-flex justify-content-center align-items-center mt-5' style={{ color: 'red' }}>
@@ -19,7 +17,7 @@ const MainProduct = ({ data }) => {
   return (
     <>
       <Container className='d-flex justify-content-center flex-column align-items-center gap-5 py-5'>
-        {currentPageProducts?.map((items) => {
+        {currentPageProducts.map((items) => {
           const { id, title, image, description, price } = items;
           return (
             <Link to={`/products/${id}`} key={id} style={{ textDecoration: 'none' }}>

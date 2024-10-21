@@ -1,18 +1,49 @@
 .welcome-page {
   height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #f8f9fa;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
 }
 
 .welcome-jumbotron {
   background-color: white;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  margin: 0;
 }
 
 .welcome-jumbotron h1 {
   color: #007bff;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
 }
 
 .welcome-jumbotron p {
   color: #6c757d;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+.welcome-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.welcome-buttons a {
+  text-decoration: none;
+}
+
+.welcome-buttons .btn {
+  font-size: 1.2rem;
+  padding: 10px 20px;
 }

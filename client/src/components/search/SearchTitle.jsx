@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { FormControl } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { searchName } from '../../features/productsSlice';
-import { useDebounce } from '../../utils/debounce/debounce';
+import { useDebounce } from '../../utils/hooks/debounce';
 
 const SearchTitle = () => {
   const [search, setSearch] = useState('');

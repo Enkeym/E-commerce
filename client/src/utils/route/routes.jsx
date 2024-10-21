@@ -2,18 +2,19 @@ import EditProducts from "../../components/product/EditProducts";
 import MainProduct from "../../components/product/MainProduct";
 import Cart from "../../pages/Cart";
 import Home from "../../pages/Home";
-import Login from "../../pages/Login";
+import Login from "../../pages/login/Login";
 import MyProducts from "../../pages/MyProducts";
 import NotFound from "../../pages/NotFound";
 import Orders from "../../pages/Orders";
 import ProductDetails from "../../pages/ProductDetails";
 import Profile from "../../pages/Profile";
-import Register from "../../pages/Register";
+import Register from "../../pages/register/Register";
+
 
 
 /* Общие маршруты */
 export const routes = [
-  { link: '/', component: <Home /> }, // Добавлен маршрут для Home
+  { link: '/', component: <Home /> },
   { link: '/products', component: <MainProduct /> },
   { link: '/products/:id', component: <ProductDetails /> },
 

@@ -16,6 +16,7 @@ module.exports = {
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true }
-    ]
+    ],
+    'eslint-disable-next-line react-refresh/only-export-components': 'off'
   }
 }

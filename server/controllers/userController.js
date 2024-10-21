@@ -27,6 +27,7 @@ const authUser = asyncHandler(async (req, res) => {
     }
 
     generateToken(res, user.id)
+
     return res.status(200).json({
       id: user.id,
       name: user.name,
@@ -75,6 +76,7 @@ const registerUser = asyncHandler(async (req, res) => {
     })
 
     generateToken(res, user.id)
+
     return res.status(201).json({
       id: user.id,
       name: user.name,

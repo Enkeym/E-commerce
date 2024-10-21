@@ -4,7 +4,15 @@ export const apiUrl =
   import.meta.env.VITE_API_URL || 'http://77.222.53.239:5000'
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: apiUrl
+  baseUrl: apiUrl,
+  credentials: 'include',
+  prepareHeaders: (headers, { getState }) => {
+    const token = getState().auth.userInfo?.token
+    if (token) {
+      headers.set('Authorization', `Bearer ${token}`)
+    }
+    return headers
+  }
 })
 
 export function providesList(result, tagType) {
