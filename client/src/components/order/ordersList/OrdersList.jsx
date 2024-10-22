@@ -2,7 +2,7 @@ import { Button, Image, ListGroup } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { apiUrl } from '../../../app/services/api';
 import { useRemoveOrdersMutation } from '../../../app/services/ordersApi';
-import { setSelectedOrder } from '../../../features/ordersSlice';
+import { removeOrder, setSelectedOrder } from '../../../features/ordersSlice';
 import styles from './OrdersList.module.css';
 
 const OrdersList = ({ data: orders }) => {
@@ -14,10 +14,11 @@ const OrdersList = ({ data: orders }) => {
     dispatch(setSelectedOrder(order));
   };
 
-  const handleDeleteOrder = async (id, e) => {
+  const handleDeleteOrder = async (orderId, e) => {
     e.stopPropagation();
     try {
-      await deleteOrder(id).unwrap();
+      await deleteOrder(orderId).unwrap();
+      dispatch(removeOrder({ id: orderId }));
     } catch (err) {
       console.error('Failed to delete the order:', err);
     }

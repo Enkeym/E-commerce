@@ -3,9 +3,12 @@ import { prisma } from '../prisma/prisma-client.js'
 import logger from '../utils/logger.js'
 
 // GET /api/orders
-const allOrders = asyncHandler(async (req, res) => {
+const myOrders = asyncHandler(async (req, res) => {
+  const userId = req.user.id
+
   try {
     const orders = await prisma.order.findMany({
+      where: { userId },
       include: {
         productsInOrder: {
           include: {
@@ -15,9 +18,9 @@ const allOrders = asyncHandler(async (req, res) => {
       }
     })
 
-    res.status(200).json(orders)
+    res.status(200).json(orders || [])
   } catch (error) {
-    logger.error(`Error in allOrders: ${error.message}`)
+    logger.error(`Error in myOrders: ${error.message}`)
     res.status(500).json({ message: 'Failed to fetch orders' })
   }
 })
@@ -101,6 +104,15 @@ const removeOrder = asyncHandler(async (req, res) => {
   const { id } = req.params
 
   try {
+    const existingOrder = await prisma.order.findUnique({
+      where: { id }
+    })
+
+    if (!existingOrder) {
+      logger.error(`Order not found: ${id}`)
+      return res.status(404).json({ message: 'Order not found' })
+    }
+
     await prisma.productInOrder.deleteMany({
       where: { orderId: id }
     })
@@ -116,4 +128,4 @@ const removeOrder = asyncHandler(async (req, res) => {
   }
 })
 
-export { addOrder, allOrders, orderId, removeOrder }
+export { addOrder, myOrders, orderId, removeOrder }

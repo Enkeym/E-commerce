@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { useGetOrdersQuery } from "../app/services/ordersApi";
-import Layout from "../components/layout/Layout";
-import Loader from "../components/loader/Loader";
-import OrdersList from "../components/order/ordersList/OrdersList";
+import { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useGetOrdersQuery } from '../app/services/ordersApi';
+import Layout from '../components/layout/Layout';
+import Loader from '../components/loader/Loader';
+import OrdersList from '../components/order/ordersList/OrdersList';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
-  const { data, error, isLoading } = useGetOrdersQuery();
   const navigate = useNavigate();
+  const { userInfo } = useSelector((state) => state.auth);
+  const { data, error, isLoading } = useGetOrdersQuery(userInfo?.id);
 
   useEffect(() => {
     if (data) {
@@ -20,7 +22,7 @@ const Orders = () => {
 
   useEffect(() => {
     if (error) {
-      toast.error("Failed to load orders");
+      toast.error('Failed to load orders');
     }
   }, [error]);
 

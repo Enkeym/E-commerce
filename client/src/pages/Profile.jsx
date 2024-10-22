@@ -90,6 +90,7 @@ const Profile = () => {
           placeholder='Email'
           value={userInfo.email}
           readOnly
+          autocomplete='off'
         />
 
         <FormInput
@@ -99,6 +100,7 @@ const Profile = () => {
           value={password}
           onChange={onChange}
           errorMessage={errors.password}
+          autocomplete='new-password'
           required
         />
 
@@ -110,6 +112,7 @@ const Profile = () => {
           onChange={onChange}
           errorMessage={errors.confirmPassword}
           required
+          autocomplete='new-password'
         />
 
         {isLoading && <Loader />}

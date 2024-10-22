@@ -1,16 +1,16 @@
 
 import { useState } from 'react';
-import styles from './Login.module.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Button, Col, Form, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { useLoginMutation } from '../../app/services/usersApi';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useLoginMutation } from '../../app/services/usersApi';
+import Layout from '../../components/layout/Layout';
+import Loader from '../../components/loader/Loader';
 import { setCredentials } from '../../features/authSlice';
 import { setCartItems } from '../../features/cartSlice';
-import Layout from '../../components/layout/Layout';
-import { Button, Col, Form, Row } from 'react-bootstrap';
 import FormInput from '../../ui/forms/FormInput';
-import Loader from '../../components/loader/Loader';
+import styles from './Login.module.css';
 
 // Паттерны для валидации полей
 const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -95,6 +95,7 @@ const Login = () => {
             onChange={onChange}
             errorMessage={errors.email}
             required
+            autocomplete='email'
             className={styles.formControl}
           />
 
@@ -106,6 +107,7 @@ const Login = () => {
             onChange={onChange}
             errorMessage={errors.password}
             required
+            autocomplete="current-password"
             className={styles.formControl}
           />
 

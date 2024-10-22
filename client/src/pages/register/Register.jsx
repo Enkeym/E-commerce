@@ -110,6 +110,7 @@ const Register = () => {
             onChange={onChange}
             errorMessage={errors.email}
             required
+            autocomplete="off"
             className={styles.formControl}
           />
 
@@ -121,6 +122,7 @@ const Register = () => {
             onChange={onChange}
             errorMessage={errors.password}
             required
+            autocomplete='off'
             className={styles.formControl}
           />
 
@@ -132,6 +134,7 @@ const Register = () => {
             onChange={onChange}
             errorMessage={errors.confirmPassword}
             required
+            autocomplete='off'
             className={styles.formControl}
           />
 

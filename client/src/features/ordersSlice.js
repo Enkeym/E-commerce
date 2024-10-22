@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+const saveOrdersToLocalStorage = (orders) => {
+  localStorage.setItem('Orders', JSON.stringify(orders))
+}
+
 const initialState = {
   orders: localStorage.getItem('Orders')
     ? JSON.parse(localStorage.getItem('Orders'))
@@ -15,20 +19,20 @@ const ordersSlice = createSlice({
   reducers: {
     setOrders: (state, action) => {
       state.orders = action.payload
-      localStorage.setItem('Orders', JSON.stringify(action.payload))
+      saveOrdersToLocalStorage(state.orders)
     },
     setSelectedOrder: (state, action) => {
       state.selectedOrder = action.payload
     },
     addOrder: (state, action) => {
       state.orders.push(action.payload)
-      localStorage.setItem('Orders', JSON.stringify(state.orders))
+      saveOrdersToLocalStorage(state.orders)
     },
     removeOrder: (state, action) => {
       state.orders = state.orders.filter(
         (order) => order.id !== action.payload.id
       )
-      localStorage.setItem('Orders', JSON.stringify(state.orders))
+      saveOrdersToLocalStorage(state.orders)
     },
     setOrdersStatus: (state, action) => {
       state.status = action.payload
@@ -47,4 +51,5 @@ export const {
   setOrdersStatus,
   setOrdersError
 } = ordersSlice.actions
+
 export default ordersSlice.reducer

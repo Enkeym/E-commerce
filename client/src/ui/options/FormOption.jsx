@@ -5,7 +5,9 @@ import Loader from "../../components/loader/Loader";
 const FormOption = ({ value, onChange, options = [], loading, error, placeholder = 'Select an option' }) => {
 
   const handleChange = useCallback((e) => {
-    onChange(e.target.value);
+    if (typeof onChange === 'function') {
+      onChange(e.target.value);
+    }
   }, [onChange]);
 
   return (

@@ -1,10 +1,10 @@
-import React from 'react';
-import {Form} from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { Form } from 'react-bootstrap';
 
 const FormInput = ({
   value,
-  onChange,
+  onChange = () => { },
   placeholder,
   type = 'text',
   label,
@@ -15,6 +15,7 @@ const FormInput = ({
   step,
   controlId,
   autoFocus = false,
+  autocomplete,
   ...rest
 }) => {
   const dynamicMessage = errorMessage
@@ -26,7 +27,7 @@ const FormInput = ({
       {label && (
         <Form.Label htmlFor={controlId}>
           {label}
-          <span className="info-icon" title={dynamicMessage} style={{marginLeft: '5px', cursor: 'pointer'}}>?</span>
+          <span className="info-icon" title={dynamicMessage} style={{ marginLeft: '5px', cursor: 'pointer' }}>?</span>
         </Form.Label>
       )}
       <Form.Control
@@ -42,6 +43,7 @@ const FormInput = ({
         min={min}
         step={step}
         isInvalid={!!errorMessage}
+        autoComplete={autocomplete}
         {...rest}
       />
       {errorMessage && (
@@ -55,7 +57,7 @@ const FormInput = ({
 
 FormInput.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   placeholder: PropTypes.string,
   type: PropTypes.string,
   label: PropTypes.string,

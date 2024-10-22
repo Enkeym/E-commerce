@@ -4,8 +4,14 @@ const ORDERS_URL = '/api/orders'
 export const ordersApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getOrders: builder.query({
-      query: () => ORDERS_URL,
-      providesTags: [{ type: 'Orders', id: 'LIST' }]
+      query: () => `${ORDERS_URL}/my`,
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }) => ({ type: 'Orders ', id })),
+              { type: 'Orders', id: 'LIST' }
+            ]
+          : [{ type: 'Orders ', id: 'LIST' }]
     }),
 
     getOrdersById: builder.query({
@@ -20,7 +26,7 @@ export const ordersApi = api.injectEndpoints({
         method: 'POST',
         body: order
       }),
-      invalidatesTags: ['Orders']
+      invalidatesTags: [{ type: 'Orders', id: 'LIST' }]
     }),
 
     removeOrders: builder.mutation({
@@ -28,7 +34,7 @@ export const ordersApi = api.injectEndpoints({
         url: `${ORDERS_URL}/${id}`,
         method: 'DELETE'
       }),
-      invalidatesTags: ['Orders']
+      invalidatesTags: [{ type: 'Orders', id: 'LIST' }]
     })
   })
 })
